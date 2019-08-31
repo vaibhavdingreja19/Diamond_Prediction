@@ -31,7 +31,13 @@ Y_train=Y[:-test_size]
 
 X_test=X[-test_size:]
 Y_test=Y[-test_size:]
-
+#comparing using both models
 clf=svm.SVR(kernel="linear")
 clf.fit(X_train,Y_train)
+clf.score(X_test,Y_test)#0.85 accuracy
+
+clf=svm.SVR(kernel="rbf")#0.55 accuracy
+clf.fit(X_train,Y_train)
 clf.score(X_test,Y_test)
+for X,Y in zip(X_test,Y_test):
+    print(f"Model:{clf.predict([X])[0]}, Actual:{Y}")
